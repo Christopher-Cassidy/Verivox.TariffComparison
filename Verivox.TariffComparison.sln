@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Verivox.TariffComparison", "Verivox.TariffComparison\Verivox.TariffComparison.csproj", "{B8B519A8-AE6F-4BA4-AB1B-14C5ABC885A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Verivox.TariffComparison.Tests", "Verivox.TariffComparison.Tests\Verivox.TariffComparison.Tests.csproj", "{FF41616F-DC14-4D43-BB78-73A95CB6926B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8B519A8-AE6F-4BA4-AB1B-14C5ABC885A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B519A8-AE6F-4BA4-AB1B-14C5ABC885A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B519A8-AE6F-4BA4-AB1B-14C5ABC885A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B519A8-AE6F-4BA4-AB1B-14C5ABC885A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF41616F-DC14-4D43-BB78-73A95CB6926B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF41616F-DC14-4D43-BB78-73A95CB6926B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF41616F-DC14-4D43-BB78-73A95CB6926B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF41616F-DC14-4D43-BB78-73A95CB6926B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33496285-FB6E-49E4-8DC5-D22A6B4196C8}
+	EndGlobalSection
+EndGlobal
