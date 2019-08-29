@@ -3,8 +3,8 @@
     /// <summary>
     /// Product Tariff view model.  The product tariff includes the <see cref="Name"/> and <see cref="AnnualCost"/> best matched for a given consumption.
     /// </summary>
-    public class ProductTariff {
-
+    public class ProductTariff
+    {
         /// <summary>
         /// Product Name
         /// </summary>

@@ -6,7 +6,6 @@ using Verivox.TariffComparison.Workflow;
 
 namespace Verivox.TariffComparison.Tests
 {
-
     [TestClass]
     public class ProductConsumptionFilterTests
     {

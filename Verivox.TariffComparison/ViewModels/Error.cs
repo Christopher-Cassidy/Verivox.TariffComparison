@@ -3,7 +3,8 @@
     /// <summary>
     /// Generic API Error message
     /// </summary>
-    public class Error {
+    public class Error
+    {
         /// <summary>
         /// Error message
         /// </summary>

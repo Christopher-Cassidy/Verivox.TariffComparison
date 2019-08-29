@@ -17,7 +17,7 @@ namespace Verivox.TariffComparison.Tests
         public void Ctor_NullProductRepository_ThrowsException()
         {
             // Arrange
-            var wf = new ComparisonWorkflow(null);
+            new ComparisonWorkflow(null);
 
             // Act
 

@@ -1,7 +1,4 @@
-﻿using System;
-using Verivox.TariffComparison.Models.Exceptions;
-
-namespace Verivox.TariffComparison.Models
+﻿namespace Verivox.TariffComparison.Models
 {
     /// <summary>
     /// Product tariff calculation model.  Includes the base rate and cost per kWh, and min/max consumption rate rules.

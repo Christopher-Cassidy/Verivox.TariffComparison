@@ -20,6 +20,10 @@ namespace Verivox.TariffComparison.Controllers
         /// </summary>
         private readonly IComparisonWorkflow _comparisonWorkflow;
 
+        /// <summary>
+        /// Products API
+        /// </summary>
+        /// <param name="comparisonWorkflow">Product Comparison Workflow used to filter products</param>
         public ProductsController(IComparisonWorkflow comparisonWorkflow) {
             _comparisonWorkflow = comparisonWorkflow ?? throw new ArgumentNullException(nameof(comparisonWorkflow));
         }
@@ -37,7 +41,8 @@ namespace Verivox.TariffComparison.Controllers
         public ActionResult<List<ProductTariff>> Get([FromQuery]int? consumptionkWh)
         {
             try {
-                if (!consumptionkWh.HasValue) throw new InvalidConsumptionRateException();
+                if (!consumptionkWh.HasValue)
+                    throw new InvalidConsumptionRateException();
 
                 _comparisonWorkflow.ProductFilter = new ProductConsumptionFilter(consumptionkWh.Value);
 

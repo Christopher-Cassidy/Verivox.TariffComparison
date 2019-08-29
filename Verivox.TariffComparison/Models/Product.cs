@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Verivox.TariffComparison.Models.Exceptions;
+﻿using System.Collections.Generic;
 
 namespace Verivox.TariffComparison.Models
 {

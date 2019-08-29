@@ -4,7 +4,7 @@ using Verivox.TariffComparison.Models;
 namespace Verivox.TariffComparison.Data
 {
     /// <summary>
-    /// Basic In-memory product repository
+    /// Basic In-memory product repository with static list of products.
     /// </summary>
     public class ProductRepository : IProductRepository
     {
@@ -46,9 +46,9 @@ namespace Verivox.TariffComparison.Data
         };
         
         /// <summary>
-        /// Returns the complete list of <see cref="Product"/>
+        /// Returns the complete list of <see cref="Product"/>s
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Complete list of <see cref="Product"/>s</returns>
         public IEnumerable<Product> GetProducts()
         {
             return Products;

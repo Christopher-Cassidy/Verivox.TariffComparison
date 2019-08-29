@@ -8,7 +8,7 @@ namespace Verivox.TariffComparison.Workflow
 {
     /// <summary>
     /// Product filter based on consumption.  Applies the business rules of each <see cref="Product.Rules"/> to find matching
-    /// tariff, and then sort each match <see cref="ProductCalculationModel"/> in ascending order of <see cref="ProductCalculationModel.AnnualCost"/>.
+    /// tariff, and then sort each match <see cref="ProductTariff"/> in ascending order of <see cref="ProductTariff.AnnualCost"/>.
     /// </summary>
     public class ProductConsumptionFilter : IProductFilter
     {
@@ -33,7 +33,7 @@ namespace Verivox.TariffComparison.Workflow
         /// Filter products and return the matching product and annual cost for the defined annual consumption.
         /// </summary>
         /// <param name="products">Product list to filter</param>
-        /// <returns></returns>
+        /// <returns>The filtered, sorted list of <see cref="ProductTariff"/>s</returns>
         public IEnumerable<ProductTariff> Filter(IEnumerable<Product> products)
         {
             var matchedProducts = Match(products);
@@ -115,8 +115,8 @@ namespace Verivox.TariffComparison.Workflow
         private CalculationModel MatchRule(Product product)
         {
             // Find matching calculation model for consumption rate
-            return product.Rules.FirstOrDefault(rule => 
-                rule.MinkWh <= _consumptionkWh && 
+            return product.Rules.FirstOrDefault(rule =>
+                rule.MinkWh <= _consumptionkWh &&
                 rule.MaxkWh > _consumptionkWh);
         }
 

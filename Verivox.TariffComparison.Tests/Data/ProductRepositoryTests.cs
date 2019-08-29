@@ -8,7 +8,8 @@ namespace Verivox.TariffComparison.Tests.Data
     public class ProductRepositoryTests
     {
         [TestMethod]
-        public void Ctor_ReturnsInstance() {
+        public void Ctor_ReturnsInstance()
+        {
             // Arrange
             var db = new ProductRepository();
 

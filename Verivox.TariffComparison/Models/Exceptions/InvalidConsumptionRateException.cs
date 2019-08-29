@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Verivox.TariffComparison.Models.Exceptions
 {
+    /// <summary>
+    /// Invalid consumption rate exception.  Consumption rates must be a valid non-negative integer.
+    /// </summary>
     public class InvalidConsumptionRateException : Exception
     {
         /// <summary>
