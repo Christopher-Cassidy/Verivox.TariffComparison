@@ -1,33 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Verivox.TariffComparison.Models.Exceptions;
 using Verivox.TariffComparison.ViewModels;
 using Verivox.TariffComparison.Workflow;
 
 namespace Verivox.TariffComparison.Controllers
 {
+    /// <summary>
+    /// Products API.  This api provides a method for listing products with annual costs for a given consumption kWh.
+    /// </summary>
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController]    
     public class ProductsController : ControllerBase
     {
-        private readonly IProductFilter _comaparisonEngine;
+        /// <summary>
+        /// Engine for comparig product tariffs
+        /// </summary>
+        private readonly IComparisonWorkflow _comparisonWorkflow;
 
-        public ProductsController(IProductFilter comparisonEngine) {
-            _comaparisonEngine = comparisonEngine ?? throw new ArgumentNullException(nameof(comparisonEngine));
+        public ProductsController(IComparisonWorkflow comparisonWorkflow) {
+            _comparisonWorkflow = comparisonWorkflow ?? throw new ArgumentNullException(nameof(comparisonWorkflow));
         }
 
         // GET api/products/5
         /// <summary>
-        /// Gets the ordered list of matching products tariffs for the given
+        /// Gets the ordered list of matching products tariffs for the given consumption rate.
         /// </summary>
-        /// <param name="consumptionkWh"></param>
-        /// <returns></returns>
+        /// <param name="consumptionkWh">Annual consumption. This must be a non-negative value.  Units: kWh</param>
+        /// <returns>Ordered list of products with annual cost for the given consumption</returns>
         [HttpGet]
-        public ActionResult<List<ProductTariffViewModel>> Get([FromQuery]int consumptionkWh)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(Error), 400)]
+        [ProducesResponseType(typeof(Error), 500)]
+        public ActionResult<List<ProductTariff>> Get([FromQuery]int? consumptionkWh)
         {
-            return _comaparisonEngine.Match(consumptionkWh).ToList();
+            try {
+                if (!consumptionkWh.HasValue) throw new InvalidConsumptionRateException();
+
+                _comparisonWorkflow.ProductFilter = new ProductConsumptionFilter(consumptionkWh.Value);
+
+                return Ok(_comparisonWorkflow.Match().ToList());
+            }
+            catch (InvalidConsumptionRateException ex) {
+                return BadRequest(new Error { Message = ex.Message });
+            }
+            catch (Exception) {
+                return StatusCode(500, new Error { Message = "Internal server error" });
+            }
         }
     }
 }

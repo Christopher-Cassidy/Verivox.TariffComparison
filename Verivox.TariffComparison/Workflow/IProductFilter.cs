@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Verivox.TariffComparison.Models;
 using Verivox.TariffComparison.ViewModels;
 
 namespace Verivox.TariffComparison.Workflow
@@ -10,10 +11,10 @@ namespace Verivox.TariffComparison.Workflow
     public interface IProductFilter
     {
         /// <summary>
-        /// Search for matching product tariffs for the given <paramref name="consumptionKwH"/>.
+        /// Search for matching <see cref="Product"/>s using a defined filter
         /// </summary>
-        /// <param name="consumptionKwH">Consumption basis in kWh</param>
-        /// <returns>List of Product Tariffs for the given <paramref name="consumptionkWh"/></returns>
-        IEnumerable<ProductTariffViewModel> Match(int consumptionkWh);
+        /// <param name="products">Products to search for matched tarrifskWh</param>
+        /// <returns>List of Product Tariffs for the given filter</returns>
+        IEnumerable<ProductTariff> Filter(IEnumerable<Product> products);
     }
 }

@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Verivox.TariffComparison.Data;
 using Verivox.TariffComparison.Workflow;
+using System.Reflection;
+using System.IO;
 
 namespace Verivox.TariffComparison
 {
@@ -34,13 +31,16 @@ namespace Verivox.TariffComparison
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1",  new OpenApiInfo { Title = "Tariff Comparer", Version = "v1" });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             // Set-up servcies for dependency injection
-            services.AddScoped<IProductFilter, ProductConsumptionFilter>();
+            services.AddScoped<IComparisonWorkflow, ComparisonWorkflow>();
             services.AddScoped<IProductRepository, ProductRepository>();
-            
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,12 +58,11 @@ namespace Verivox.TariffComparison
             // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tariff Comparer API");
             });
 
 
             // Add additional middleware for logging, authentication, policies, xsrf validation, etc.
-
             app.UseMvc();
         }
     }

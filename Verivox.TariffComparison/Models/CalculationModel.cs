@@ -1,11 +1,13 @@
 ﻿using System;
+using Verivox.TariffComparison.Models.Exceptions;
 
 namespace Verivox.TariffComparison.Models
 {
     /// <summary>
     /// Product tariff calculation model.  Includes the base rate and cost per kWh, and min/max consumption rate rules.
     /// </summary>
-    public class CalculationModel {
+    public class CalculationModel
+    {
         /// <summary>
         /// This is the base rate of the tariff exclusive of the consumption rate.  Units: euros/year
         /// </summary>
@@ -35,29 +37,5 @@ namespace Verivox.TariffComparison.Models
         /// The exclusive maximum value of this consumption rate of this tariff (i.e. consumption &lt; MaxkWh)
         /// </summary>
         public double MaxkWh { get; set; }
-
-        /// <summary>
-        /// Calculate the 
-        /// </summary>
-        /// <param name="consumptionkWh"></param>
-        /// <returns></returns>
-        /// <exception cref="InvalidConsumptionRateException">Consumption rate must be a non-negative value, and match</exception>
-        public double CalculateAnnualTariff(int consumptionkWh)
-        {
-            if (consumptionkWh < 0)
-                throw new InvalidConsumptionRateException("Consumption rate does not match allowed calculation rules.  Consumption rate must be a non-negatve number.");
-
-            try
-            {
-                return AnnualBaseRate +
-                    (MonthlyBaseRate * 12) +
-                    (CostPerkWh * consumptionkWh) +
-                    (AdditonalConsumptionCostPerkWh * (consumptionkWh - MinkWh));
-            }
-            catch (Exception)
-            {
-                throw new InvalidConsumptionRateException("Consumption rate does not match allowed calculation rules.  Consumption rate must be a non-negatve number.");
-            }
-        }
     }
 }
